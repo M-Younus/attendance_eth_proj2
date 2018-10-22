@@ -2,28 +2,20 @@ pragma solidity ^0.4.0;
 pragma experimental ABIEncoderV2;
 contract Attendance {
  
- uint roll=0;
  
- struct student{
-     string name;
-     uint roll_num;
-     bool present;
-     
- }
+ string[] public students;
  
- student[] students;
  
  function register(string _fName) public {
-     students[roll]=student(_fName,roll,false);
-     roll+=1;
+     students.push(_fName);
  }
  
- function get_all_students() public returns (student[]){
+ function get_all_students() public returns (string[]){
      return students;
  }
  
  function get_one() returns (string){
-     return students[0].name;
+     return students[0];
  }
  
 }

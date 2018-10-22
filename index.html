@@ -37,22 +37,8 @@
             "name": "get_all_students",
             "outputs": [
                 {
-                    "components": [
-                        {
-                            "name": "name",
-                            "type": "string"
-                        },
-                        {
-                            "name": "roll_num",
-                            "type": "uint256"
-                        },
-                        {
-                            "name": "present",
-                            "type": "bool"
-                        }
-                    ],
                     "name": "",
-                    "type": "tuple[]"
+                    "type": "string[]"
                 }
             ],
             "payable": false,
@@ -86,9 +72,28 @@
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "students",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
         }
     ]);
-        var students = AttendanceContract.at('0x4f3199deab92a651ebdfa9ab2755d650c1b90397');
+        var students = AttendanceContract.at('0xd24d6a4eeb00be0aa82303a80eda4de6ed63926d');
         
         //Courses.setInstructor('Stephen Hawking', 76);
         //Courses.getInstructor();
@@ -98,10 +103,11 @@
         $("#button").click(function () {
             //Courses.setInstructor($("#name").val(), $("#age").val());
             students.register($("#name").val());
+            console.log(students.get_one());
         });
-        //Courses.getInstructor(function (error, result) {
+        //students.get_one(function (error, result) {
           //  if (!error) {
-            //    $("#instructor").html(result[0] + ' (' + result[1] + ' years old)');
+            //    //$("#instructor").html(result[0] + ' (' + result[1] + ' years old)');
               //  console.log(result);
             //}
             //else
