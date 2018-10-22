@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="web3.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <h1>First Smart Contract</h1>
+        <h2 id="instructor"></h2>
+        <label for="name" class="col-lg-2 control-label">instructor Name</label>
+        <input type="text" id="name">
+        <label for="name" class="col-lg-2 control-label">instructor Age</label>
+        <input type="text" id="age">
+        <button id="button">Update instructor</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script>
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        }
+        else {
+            //set the provider you want from web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+        var AttendanceContract = web3.eth.contract([
+        {
+            "constant": false,
+            "inputs": [],
+            "name": "get_all_students",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "name": "name",
+                            "type": "string"
+                        },
+                        {
+                            "name": "roll_num",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "present",
+                            "type": "bool"
+                        }
+                    ],
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_fName",
+                    "type": "string"
+                }
+            ],
+            "name": "register",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ]);
+        var students = AttendanceContract.at('0x5c8a98c1c4efb432e92885f5a5d94b6f29515ec1');
+        
+        Courses.setInstructor('Stephen Hawking', 76);
+        Courses.getInstructor();
+        $("#button").click(function () {
+            Courses.setInstructor($("#name").val(), $("#age").val());
+        });
+        Courses.getInstructor(function (error, result) {
+            if (!error) {
+                $("#instructor").html(result[0] + ' (' + result[1] + ' years old)');
+                console.log(result);
+            }
+            else
+                console.error(error);
+        });
+    </script>
+</body>
+
+</html>
