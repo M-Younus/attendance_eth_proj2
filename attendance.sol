@@ -21,6 +21,9 @@ contract Attendance {
  function get_all_students() public returns (student[]){
      return students;
  }
-
+ 
+ function get_one() returns (string){
+     return students[0].name;
+ }
  
 }

@@ -61,6 +61,20 @@
         },
         {
             "constant": false,
+            "inputs": [],
+            "name": "get_one",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
             "inputs": [
                 {
                     "name": "_fName",
@@ -74,21 +88,25 @@
             "type": "function"
         }
     ]);
-        var students = AttendanceContract.at('0x5c8a98c1c4efb432e92885f5a5d94b6f29515ec1');
+        var students = AttendanceContract.at('0x4f3199deab92a651ebdfa9ab2755d650c1b90397');
         
-        Courses.setInstructor('Stephen Hawking', 76);
-        Courses.getInstructor();
+        //Courses.setInstructor('Stephen Hawking', 76);
+        //Courses.getInstructor();
+
+        //students.register('hell');
+        
         $("#button").click(function () {
-            Courses.setInstructor($("#name").val(), $("#age").val());
+            //Courses.setInstructor($("#name").val(), $("#age").val());
+            students.register($("#name").val());
         });
-        Courses.getInstructor(function (error, result) {
-            if (!error) {
-                $("#instructor").html(result[0] + ' (' + result[1] + ' years old)');
-                console.log(result);
-            }
-            else
-                console.error(error);
-        });
+        //Courses.getInstructor(function (error, result) {
+          //  if (!error) {
+            //    $("#instructor").html(result[0] + ' (' + result[1] + ' years old)');
+              //  console.log(result);
+            //}
+            //else
+              //  console.error(error);
+        //});
     </script>
 </body>
 
